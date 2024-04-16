@@ -1,4 +1,4 @@
 package main
 
-type Result float32
+type Result float64
 

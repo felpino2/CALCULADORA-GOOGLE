@@ -1,18 +1,11 @@
 package main
 
 type arithmicOperation struct {
-	Number1 float32 
-	Number2 float32
+	Number1 float64
+	Number2 float64
 }
 
-CalculatorMap = map[string]Operating{
-	"sum": Sum{},
-	"subtraction": Subtraction{},
-	"multiply": Multiply{},
-	"division": Division{},
-	"pow": Pow{}
-	"root": Root{}
-}
+
 
 
 
