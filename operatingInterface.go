@@ -2,10 +2,13 @@ package main
 
 type Operating interface {
 	
-	Operate() Result;
+	Operate() Result; //método da interface
 }
 
-var CalculatorMap = map[string]Operating{
+type Name string
+
+var CalculatorMap = map[Name]Operating{
 	"sum": Sum{},
+	"subtraction": Subtraction{},
 	
 }
