@@ -2,7 +2,8 @@ package main
 
 import ("log"
 	"time"
-	"net/http")
+	"net/http"
+	"encoding/json")
 	
 type Router struct {}
 
@@ -11,19 +12,22 @@ func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	// queryString é parâmetro 
 	// /judge?strategy=corrupt
 	
-	url := req.URL
-	
-	path := url.Path //path, o pedido - string
-	
-	if path != "/calculator" {
-		res.Write([]byte("ERRO! 404"))
+	if req.Method != "GET" || path != "calculator" {
+		resp := HTTPMessage{Code: 404, ShortMessage: "Not Found", Description: path + " not supported"}
+		jon, _ := json.Marshal(resp)
+		res.Write(jon)
 		return
 	}
 	
-	name := url.Query().Get("Name")
-	resposta := CalculatorMap[Name(name)].Operate()
+	url := req.URL
+	path := url.Path //path, o pedido - string
 	
-	res.Write(resposta.Bytes())
+	operation, num1, num1, err := 
+	
+	op := req.URL.Query().Get("op")
+	
+	
+	res.Write([]byte(respostaFinal))
 	
 }
 

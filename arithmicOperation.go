@@ -1,7 +1,7 @@
 package main
 
-type arithmicOperation struct {
-	Number1 float64
+type ArithmicOperation struct {
+	Number1 float64 //maisculo é publico, minusculo é privado
 	Number2 float64
 }
 
