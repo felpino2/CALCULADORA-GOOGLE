@@ -8,26 +8,38 @@ import ("log"
 type Router struct {}
 
 func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	// http:// ip /path?queryString
-	// queryString é parâmetro 
-	// /judge?strategy=corrupt
+		/* http:// ip /path?queryString
+	 		queryString é parâmetro 
+	 		judge?strategy=corrupt */
+	
+	
+	url := req.URL
+	path := url.Path
 	
 	if req.Method != "GET" || path != "calculator" {
-		resp := HTTPMessage{Code: 404, ShortMessage: "Not Found", Description: path + " not supported"}
+		resp := HTTPMessage{Code: 404, ShortMessage: "Not Found"}
 		jon, _ := json.Marshal(resp)
 		res.Write(jon)
 		return
 	}
 	
-	url := req.URL
-	path := url.Path //path, o pedido - string
 	
-	operation, num1, num1, err := 
+	operation, numb1, numb2, erro := Translator(req)
 	
-	op := req.URL.Query().Get("op")
+	if erro != nil {
+		//codigo de rro
+		return
+	}
 	
+	result, err := Operation(operation, numb1, numb2)
 	
-	res.Write([]byte(respostaFinal))
+	if err != nil {
+		//codigo de erro
+		return
+	}
+	
+	res.Write(result.Bytes())
+	
 	
 }
 
