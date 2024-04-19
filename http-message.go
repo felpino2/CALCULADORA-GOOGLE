@@ -1,5 +1,7 @@
 package main
 
+import "strconv"
+
 
 type HTTPMessage struct {
 	Code int `json:"code"`
@@ -22,6 +24,8 @@ func InvalidOp400 (operation string) OperationMessage {
 	return OperationMessage{Code: 400, Result: "Invalid Operation", Operation: operation}
 }
 
-/*func SuccessfulOp200 () OperationMessage {
-	return 
-} */
+func SuccessfulOp200 (result Result, operation string) OperationMessage {
+
+	strResult := strconv.FormatFloat(float64(result), 'f', -1, 64)	
+	return OperationMessage{Code: 200, Result: strResult, Operation: operation}
+}

@@ -1,6 +1,11 @@
 package main
 
-import "math"
+import (
+	"math"
+	"encoding/json"
+	"net/http"
+)
+
 
 type Name string
 
@@ -66,12 +71,13 @@ func (s Root) Operate() Result{
 } 
 
 
-func Operation(operation string, n1, n2 float64) (Result, error){
+func Operation(operation string, n1, n2 float64, res http.ResponseWriter) (Result, error){
 	valor, ok := CalculatorMap[Name(operation)]
 	
-	if !ok {
-	//400
-		InvalidOp400(operation) 	
+	if !ok { 
+		resp := InvalidOp400(operation)
+		jon, _ := json.Marshal(resp)
+		res.Write(jon)
 		return Result(0), nil
 	}
 	

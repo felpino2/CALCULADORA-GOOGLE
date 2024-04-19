@@ -1,3 +1,5 @@
+//http://192.168.0.32:8080/calculator?op=sum&n1=2&n2=5
+
 package main
 
 import ("log"
@@ -27,18 +29,23 @@ func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	operation, numb1, numb2, erro := Translator(req)
 	
 	if erro != nil {
-		//codigo de rro
+		resp := HTTPMessageMap[500]
+		jon, _ := json.Marshal(resp)
+		res.Write(jon)
 		return
 	}
 	
-	result, err := Operation(operation, numb1, numb2)
+	result, err := Operation(operation, numb1, numb2, res)
 	
 	if err != nil {
 		//codigo de erro
 		return
 	}
 	
-	res.Write(result.Bytes())
+	resp := SuccessfulOp200 (result, operation)
+	jon, _ := json.Marshal(resp)
+	res.Write(jon)
+		
 	
 	
 }
