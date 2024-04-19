@@ -52,6 +52,10 @@ type Division struct {
 }
 
 func (s Division) Operate() Result {
+	if s.Number2 == 0 {
+		InvalidOp400("division")
+		return Result(0)
+	}
 	return Result(s.Number1/s.Number2)
 }
 
