@@ -13,9 +13,10 @@ func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	 		judge?strategy=corrupt */
 	
 	
+	url := req.URL
+	path := url.Path
 	
-	
-	if req.Method != "GET"  {
+	if req.Method != "GET" || path != "/calculator" {
 		resp := HTTPMessage{Code: 404, ShortMessage: "Not Found"}
 		jon, _ := json.Marshal(resp)
 		res.Write(jon)
