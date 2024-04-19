@@ -70,7 +70,8 @@ func Operation(operation string, n1, n2 float64) (Result, error){
 	valor, ok := CalculatorMap[Name(operation)]
 	
 	if !ok {
-	//ADICIONAR FUNÇÃO PARA CODIGO 404
+	//400
+		InvalidOp400(operation) 	
 		return Result(0), nil
 	}
 	

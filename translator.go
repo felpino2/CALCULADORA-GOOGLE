@@ -1,3 +1,5 @@
+//http://192.168.0.32:8080/calculator?op=sub&n1=2&n2=3
+
 package main
 
 import (
@@ -8,6 +10,7 @@ import (
 func Translator(req *http.Request) (string, float64, float64, error){
 
 	tradutorURL := req.URL.Query()
+	
 	
 	
 	operation := tradutorURL.Get("op")

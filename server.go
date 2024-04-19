@@ -17,7 +17,7 @@ func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	path := url.Path
 	
 	if req.Method != "GET" || path != "/calculator" {
-		resp := HTTPMessage{Code: 404, ShortMessage: "Not Found"}
+		resp := HTTPMessageMap[404]
 		jon, _ := json.Marshal(resp)
 		res.Write(jon)
 		return
